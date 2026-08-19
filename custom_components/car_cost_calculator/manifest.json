@@ -1,0 +1,10 @@
+{
+  "domain": "car_cost_calculator",
+  "name": "Car Cost Calculator",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/yourusername/ha-car-cost-calculator",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/yourusername/ha-car-cost-calculator/issues",
+  "version": "1.0.0"
+}

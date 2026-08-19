@@ -1,0 +1,177 @@
+add_refuel:
+  name: Add Refuel
+  description: Manually add a refuel session.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: The ID of the car entry.
+      required: true
+      selector:
+        text:
+    litres:
+      name: Litres
+      description: Amount of fuel added.
+      required: true
+      selector:
+        number:
+          step: 0.1
+    price_total:
+      name: Total Price
+      description: Total cost of the refuel.
+      required: false
+      selector:
+        number:
+          step: 0.01
+    price_per_litre:
+      name: Price per Litre
+      description: Price per litre.
+      required: false
+      selector:
+        number:
+          step: 0.001
+    odometer_km:
+      name: Odometer
+      description: Current odometer value.
+      required: false
+      selector:
+        number:
+          step: 0.1
+    is_full_tank:
+      name: Is Full Tank
+      description: Whether the tank was filled to the top.
+      required: false
+      default: false
+      selector:
+        boolean:
+    notes:
+      name: Notes
+      description: Additional notes.
+      required: false
+      selector:
+        text:
+
+add_charge:
+  name: Add Charge
+  description: Manually add a charging session.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: The ID of the car entry.
+      required: true
+      selector:
+        text:
+    energy_kwh:
+      name: Energy (kWh)
+      description: Amount of energy charged.
+      required: true
+      selector:
+        number:
+          step: 0.1
+    price_total:
+      name: Total Price
+      description: Total cost of the charge.
+      required: false
+      selector:
+        number:
+          step: 0.01
+    price_per_kwh:
+      name: Price per kWh
+      description: Price per kWh.
+      required: false
+      selector:
+        number:
+          step: 0.001
+    odometer_km:
+      name: Odometer
+      description: Current odometer value.
+      required: false
+      selector:
+        number:
+          step: 0.1
+    notes:
+      name: Notes
+      description: Additional notes.
+      required: false
+      selector:
+        text:
+
+add_maintenance:
+  name: Add Maintenance
+  description: Add a maintenance record.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: The ID of the car entry.
+      required: true
+      selector:
+        text:
+    description:
+      name: Description
+      description: Description of the maintenance.
+      required: true
+      selector:
+        text:
+    cost:
+      name: Cost
+      description: Cost of the maintenance.
+      required: true
+      selector:
+        number:
+          step: 0.01
+    odometer_km:
+      name: Odometer
+      description: Current odometer value.
+      required: false
+      selector:
+        number:
+          step: 0.1
+    date:
+      name: Date
+      description: Date of the maintenance (ISO format).
+      required: false
+      selector:
+        text:
+    notes:
+      name: Notes
+      description: Additional notes.
+      required: false
+      selector:
+        text:
+
+delete_entry:
+  name: Delete Entry
+  description: Delete a session or maintenance entry.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: The ID of the car entry.
+      required: true
+      selector:
+        text:
+    record_id:
+      name: Record ID
+      description: The ID of the record to delete.
+      required: true
+      selector:
+        text:
+
+export_data:
+  name: Export Data
+  description: Export car data to a file.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: The ID of the car entry.
+      required: true
+      selector:
+        text:
+    format:
+      name: Format
+      description: Export format (csv or json).
+      required: false
+      default: csv
+      selector:
+        select:
+          options:
+            - csv
+            - json

@@ -1,0 +1,139 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add Car",
+        "description": "Enter the basic details for your car.",
+        "data": {
+          "car_name": "Car Name",
+          "car_type": "Car Type"
+        }
+      },
+      "entities": {
+        "title": "Connect Entities",
+        "description": "Select the Home Assistant entities for this car.",
+        "data": {
+          "odometer_entity": "Odometer Sensor",
+          "fuel_level_entity": "Fuel Level Sensor",
+          "battery_level_entity": "Battery Level Sensor",
+          "charging_energy_entity": "Charging Energy Sensor (cumulative kWh)",
+          "charging_power_entity": "Charging Power Sensor (Watts)"
+        },
+        "data_description": {
+          "odometer_entity": "Sensor that reports the car's odometer in km.",
+          "fuel_level_entity": "Sensor that reports the fuel tank level in percent.",
+          "battery_level_entity": "Sensor that reports the battery state of charge in percent.",
+          "charging_energy_entity": "Shelly sensor that reports cumulative energy consumed in kWh.",
+          "charging_power_entity": "Shelly sensor that reports instantaneous power draw in Watts."
+        }
+      },
+      "pricing": {
+        "title": "Pricing & Thresholds",
+        "description": "Set electricity/fuel pricing and charging detection thresholds.",
+        "data": {
+          "electricity_price_per_kwh": "Electricity Price (€/kWh)",
+          "fuel_price_per_litre": "Fuel Price (€/litre)",
+          "fuel_tank_size_litres": "Fuel Tank Size (litres)",
+          "power_threshold_watts": "Charging Detection Threshold (Watts)",
+          "debounce_seconds": "Debounce Time (seconds)"
+        },
+        "data_description": {
+          "electricity_price_per_kwh": "Price you pay per kWh of electricity.",
+          "fuel_price_per_litre": "Price you pay per litre of fuel.",
+          "fuel_tank_size_litres": "Total fuel tank capacity in litres. Used to calculate litres consumed from percentage change.",
+          "power_threshold_watts": "Power draw (in Watts) above which a charging session is detected. Default: 50W.",
+          "debounce_seconds": "Seconds the power must stay below threshold before a session is considered ended. Default: 120s."
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "user": {
+        "title": "Edit Car Details",
+        "description": "Edit the basic details for your car.",
+        "data": {
+          "car_name": "Car Name",
+          "car_type": "Car Type"
+        }
+      },
+      "entities": {
+        "title": "Connect Entities",
+        "description": "Update the Home Assistant entities for this car.",
+        "data": {
+          "odometer_entity": "Odometer Sensor",
+          "fuel_level_entity": "Fuel Level Sensor",
+          "battery_level_entity": "Battery Level Sensor",
+          "charging_energy_entity": "Charging Energy Sensor (cumulative kWh)",
+          "charging_power_entity": "Charging Power Sensor (Watts)"
+        }
+      },
+      "pricing": {
+        "title": "Pricing & Thresholds",
+        "description": "Update electricity/fuel pricing and charging detection thresholds.",
+        "data": {
+          "electricity_price_per_kwh": "Electricity Price (€/kWh)",
+          "fuel_price_per_litre": "Fuel Price (€/litre)",
+          "fuel_tank_size_litres": "Fuel Tank Size (litres)",
+          "power_threshold_watts": "Charging Detection Threshold (Watts)",
+          "debounce_seconds": "Debounce Time (seconds)"
+        }
+      }
+    }
+  },
+  "services": {
+    "add_refuel": {
+      "name": "Add Refuel",
+      "description": "Log a manual refueling event.",
+      "fields": {
+        "entry_id": { "name": "Car Entry ID", "description": "The config entry ID of the car." },
+        "litres": { "name": "Litres", "description": "Amount of fuel added in litres." },
+        "price_total": { "name": "Total Price", "description": "Total cost of the refuel in €." },
+        "price_per_litre": { "name": "Price per Litre", "description": "Price per litre in €." },
+        "odometer_km": { "name": "Odometer", "description": "Current odometer reading in km." },
+        "is_full_tank": { "name": "Full Tank", "description": "Whether this was a full tank fill." },
+        "notes": { "name": "Notes", "description": "Optional notes about this refuel." }
+      }
+    },
+    "add_charge": {
+      "name": "Add Charge",
+      "description": "Log a manual charging event.",
+      "fields": {
+        "entry_id": { "name": "Car Entry ID", "description": "The config entry ID of the car." },
+        "energy_kwh": { "name": "Energy (kWh)", "description": "Amount of energy charged in kWh." },
+        "price_total": { "name": "Total Price", "description": "Total cost of the charge in €." },
+        "price_per_kwh": { "name": "Price per kWh", "description": "Price per kWh in €." },
+        "odometer_km": { "name": "Odometer", "description": "Current odometer reading in km." },
+        "notes": { "name": "Notes", "description": "Optional notes about this charge." }
+      }
+    },
+    "add_maintenance": {
+      "name": "Add Maintenance",
+      "description": "Log a maintenance event.",
+      "fields": {
+        "entry_id": { "name": "Car Entry ID", "description": "The config entry ID of the car." },
+        "description": { "name": "Description", "description": "Description of the maintenance work." },
+        "cost": { "name": "Cost", "description": "Cost of the maintenance in €." },
+        "odometer_km": { "name": "Odometer", "description": "Odometer reading in km at time of maintenance." },
+        "date": { "name": "Date", "description": "Date of maintenance (YYYY-MM-DD)." },
+        "notes": { "name": "Notes", "description": "Optional notes." }
+      }
+    },
+    "delete_entry": {
+      "name": "Delete Entry",
+      "description": "Delete a session or maintenance entry by its ID.",
+      "fields": {
+        "entry_id": { "name": "Car Entry ID", "description": "The config entry ID of the car." },
+        "record_id": { "name": "Record ID", "description": "The UUID of the record to delete." }
+      }
+    },
+    "export_data": {
+      "name": "Export Data",
+      "description": "Export all data for a car to CSV or JSON.",
+      "fields": {
+        "entry_id": { "name": "Car Entry ID", "description": "The config entry ID of the car." },
+        "format": { "name": "Format", "description": "Export format: csv or json." }
+      }
+    }
+  }
+}
